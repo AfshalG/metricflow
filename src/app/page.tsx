@@ -1,3 +1,5 @@
+import { formatBadge } from '@/lib/badges';
+
 const metrics = [
   { label: 'Total Revenue', value: '$48,290', change: '+12.4%', up: true },
   { label: 'Active Users', value: '2,847', change: '+8.1%', up: true },
@@ -111,7 +113,7 @@ export default function Home() {
             <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '12px', padding: '12px 0', borderBottom: i < recentActivity.length - 1 ? '1px solid #1a1a1a' : 'none' }}>
               <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: a.type === 'success' ? '#22c55e' : a.type === 'error' ? '#ef4444' : a.type === 'warning' ? '#eab308' : '#3b82f6', flexShrink: 0 }} />
               <div style={{ flex: 1 }}>
-                <span style={{ fontSize: '14px' }}>{a.event}</span>
+                <span style={{ fontSize: '14px' }}>{formatBadge(a.event)}</span>
                 <span style={{ fontSize: '13px', color: '#555', marginLeft: '8px' }}>{a.user}</span>
               </div>
               <span style={{ fontSize: '12px', color: '#444' }}>{a.time}</span>
