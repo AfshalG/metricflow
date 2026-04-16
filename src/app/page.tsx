@@ -1,3 +1,7 @@
+'use client';
+
+import { exportToCSV } from '@/lib/export';
+
 const metrics = [
   { label: 'Total Revenue', value: '$48,290', change: '+12.4%', up: true },
   { label: 'Active Users', value: '2,847', change: '+8.1%', up: true },
@@ -23,6 +27,14 @@ const topPages = [
 ];
 
 export default function Home() {
+  const handleExport = () => {
+    exportToCSV({
+      filename: 'top-pages',
+      columns: ['path', 'views', 'unique'],
+      data: topPages,
+    });
+  };
+
   return (
     <div style={{ minHeight: '100vh', display: 'flex' }}>
       {/* Sidebar */}
@@ -51,7 +63,7 @@ export default function Home() {
               <option>Last 30 days</option>
               <option>Last 90 days</option>
             </select>
-            <button style={{ padding: '8px 16px', background: '#22c55e', color: '#000', borderRadius: '8px', border: 'none', fontWeight: 600, fontSize: '13px', cursor: 'pointer' }}>Export</button>
+            <button onClick={handleExport} style={{ padding: '8px 16px', background: '#22c55e', color: '#000', borderRadius: '8px', border: 'none', fontWeight: 600, fontSize: '13px', cursor: 'pointer' }}>Export</button>
           </div>
         </div>
 
