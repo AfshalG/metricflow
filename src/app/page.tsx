@@ -44,7 +44,7 @@ export default function Home() {
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '32px' }}>
           <div>
             <h1 style={{ fontSize: '24px', fontWeight: 700, margin: 0 }}>Dashboard</h1>
-            <p style={{ color: '#666', fontSize: '14px', margin: '4px 0 0' }}>Last updated: just now</p>
+            <p style={{ color: '#666', fontSize: '14px', margin: '4px 0 0' }}>Overview · Last updated: just now</p>
           </div>
           <div style={{ display: 'flex', gap: '8px' }}>
             <select style={{ padding: '8px 12px', background: '#111', border: '1px solid #333', borderRadius: '8px', color: '#ccc', fontSize: '13px' }}>
