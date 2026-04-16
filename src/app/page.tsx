@@ -3,6 +3,7 @@ const metrics = [
   { label: 'Active Users', value: '2,847', change: '+8.1%', up: true },
   { label: 'Conversion Rate', value: '3.24%', change: '-0.3%', up: false },
   { label: 'Avg. Session', value: '4m 32s', change: '+15.7%', up: true },
+  { label: 'MRR', value: '$82,450', change: '+6.2%', up: true },
 ];
 
 const recentActivity = [
@@ -56,7 +57,7 @@ export default function Home() {
         </div>
 
         {/* Metric Cards */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '16px', marginBottom: '32px' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: '16px', marginBottom: '32px' }}>
           {metrics.map((m, i) => (
             <div key={i} style={{ padding: '24px', background: '#111', borderRadius: '12px', border: '1px solid #1a1a1a' }}>
               <div style={{ fontSize: '13px', color: '#666', marginBottom: '8px' }}>{m.label}</div>
