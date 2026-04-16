@@ -1,3 +1,7 @@
+'use client';
+
+import { useState } from 'react';
+
 const metrics = [
   { label: 'Total Revenue', value: '$48,290', change: '+12.4%', up: true },
   { label: 'Active Users', value: '2,847', change: '+8.1%', up: true },
@@ -23,7 +27,20 @@ const topPages = [
   { path: '/signup', views: 3421, unique: 3102 },
 ];
 
+const filterTypes = ['all', 'success', 'error', 'warning', 'info'] as const;
+
 export default function Home() {
+  const [activityFilter, setActivityFilter] = useState<typeof filterTypes[number]>('all');
+
+  const filteredActivity = activityFilter === 'all'
+    ? recentActivity
+    : recentActivity.filter(a => a.type === activityFilter);
+
+  const getFilterCount = (type: typeof filterTypes[number]) => {
+    if (type === 'all') return recentActivity.length;
+    return recentActivity.filter(a => a.type === type).length;
+  };
+
   return (
     <div style={{ minHeight: '100vh', display: 'flex' }}>
       {/* Sidebar */}
@@ -108,8 +125,29 @@ export default function Home() {
         {/* Activity Feed */}
         <div style={{ background: '#111', borderRadius: '12px', border: '1px solid #1a1a1a', padding: '24px', marginTop: '24px' }}>
           <h3 style={{ fontSize: '16px', fontWeight: 600, marginTop: 0, marginBottom: '16px' }}>Recent Activity</h3>
-          {recentActivity.map((a, i) => (
-            <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '12px', padding: '12px 0', borderBottom: i < recentActivity.length - 1 ? '1px solid #1a1a1a' : 'none' }}>
+          <div style={{ display: 'flex', gap: '8px', marginBottom: '16px' }}>
+            {filterTypes.map((type) => (
+              <button
+                key={type}
+                onClick={() => setActivityFilter(type)}
+                style={{
+                  padding: '6px 12px',
+                  borderRadius: '6px',
+                  border: '1px solid',
+                  fontSize: '12px',
+                  fontWeight: 500,
+                  cursor: 'pointer',
+                  background: activityFilter === type ? '#22c55e' : 'transparent',
+                  borderColor: activityFilter === type ? '#22c55e' : '#333',
+                  color: activityFilter === type ? '#000' : '#aaa',
+                }}
+              >
+                {type.charAt(0).toUpperCase() + type.slice(1)} ({getFilterCount(type)})
+              </button>
+            ))}
+          </div>
+          {filteredActivity.map((a, i) => (
+            <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '12px', padding: '12px 0', borderBottom: i < filteredActivity.length - 1 ? '1px solid #1a1a1a' : 'none' }}>
               <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: a.type === 'success' ? '#22c55e' : a.type === 'error' ? '#ef4444' : a.type === 'warning' ? '#eab308' : '#3b82f6', flexShrink: 0 }} />
               <div style={{ flex: 1 }}>
                 <span style={{ fontSize: '14px' }}>{a.event}</span>
