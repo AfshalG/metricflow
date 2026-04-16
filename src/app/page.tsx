@@ -14,12 +14,14 @@ const recentActivity = [
   { event: 'API rate limit hit', user: 'bot@scraper.net', time: '31m ago', type: 'warning' },
 ];
 
-const topPages = [
+type PageStat = { path: string; views: number; unique: number };
+
+const topPages: PageStat[] = [
   { path: '/dashboard', views: 12480, unique: 3201 },
   { path: '/pricing', views: 8932, unique: 6744 },
   { path: '/docs/api', views: 6211, unique: 4102 },
   { path: '/blog/launch', views: 4890, unique: 3988 },
-  { path: '/signup', views: 3421, unique: 3102 },
+  { path: '/signup', views: '3421', unique: 3102 },
 ];
 
 export default function Home() {
